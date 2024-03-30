@@ -2,65 +2,39 @@ package com.qztc.parkingmanagementsystem.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.qztc.parkingmanagementsystem.util.JwtUtil;
-import io.jsonwebtoken.Claims;
-import io.micrometer.common.util.StringUtils;
+import com.qztc.parkingmanagementsystem.vo.ResultVo;
+import jakarta.servlet.*;
+import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.web.servlet.HandlerInterceptor;
-import org.springframework.web.servlet.ModelAndView;
 
-import java.io.PrintWriter;
+import java.io.IOException;
 
-public class LoginFilter implements HandlerInterceptor {
+@WebFilter
+public class LoginFilter implements Filter {
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        try {
-            String accessToken = request.getHeader("token");
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+        HttpServletRequest request = (HttpServletRequest) servletRequest;
+        String servletPath = request.getServletPath();
 
-            if (accessToken == null) accessToken = request.getParameter("token");
+        if (servletPath.equals("/parking/user/login") || servletPath.equals("/parking/user/register")) {
+            filterChain.doFilter(servletRequest, servletResponse);
 
-            if (StringUtils.isNotBlank(accessToken)) {
-                Claims claims = JwtUtil.checkToken(accessToken);
-
-                if (claims == null) {
-                    sendJsonMessage(response, "token失效，请重新登录");
-
-                    return false;
-                }
-
-                String username = (String) claims.get("username");
-                request.setAttribute("username", username);
-
-                return true;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+            return;
         }
 
-        sendJsonMessage(response, "token失效，请重新登录");
+        String token = request.getHeader("Authorization");
 
-        return false;
-    }
+        if (token == null || token.isEmpty()) {
+            servletResponse.setContentType("text/html;charset=utf-8");
+            ResultVo resultVo = ResultVo.error("请重新登录");
+            servletResponse.getWriter().write(new ObjectMapper().writeValueAsString(resultVo));
 
-    @Override
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-    }
-
-    @Override
-    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-    }
-
-    public static void sendJsonMessage(HttpServletResponse response, Object obj) {
-
-        try {
-            ObjectMapper objectMapper = new ObjectMapper();
-            response.setContentType("application/json; charset=utf-8");
-            PrintWriter writer = response.getWriter();
-            writer.print(objectMapper.writeValueAsString(obj));
-            writer.close();
-            response.flushBuffer();
-        } catch (Exception e) {
-            e.printStackTrace();
+            return;
         }
+
+        Long userId = JwtUtil.getUserId(token);
+
+        System.out.println(userId);
+        filterChain.doFilter(servletRequest, servletResponse);
     }
 }

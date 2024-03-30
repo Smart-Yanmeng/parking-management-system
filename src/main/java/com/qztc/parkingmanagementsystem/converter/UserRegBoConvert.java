@@ -1,15 +1,15 @@
 package com.qztc.parkingmanagementsystem.converter;
 
-import com.qztc.parkingmanagementsystem.bo.UserLoginBo;
+import com.qztc.parkingmanagementsystem.bo.UserRegBo;
 import com.qztc.parkingmanagementsystem.po.BUserPo;
 import com.qztc.parkingmanagementsystem.util.ClassConvertUtil;
 import org.springframework.beans.BeanUtils;
 
-public class UserLoginBoConvert implements ClassConvertUtil<UserLoginBo, BUserPo> {
+public class UserRegBoConvert implements ClassConvertUtil<UserRegBo, BUserPo> {
     @Override
-    public BUserPo convert(UserLoginBo userLoginBo) {
+    public BUserPo convert(UserRegBo userRegBo) {
         BUserPo bUserPo = new BUserPo();
-        BeanUtils.copyProperties(userLoginBo, bUserPo);
+        BeanUtils.copyProperties(userRegBo, bUserPo);
 
         return bUserPo;
     }

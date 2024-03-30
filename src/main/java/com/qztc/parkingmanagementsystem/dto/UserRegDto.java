@@ -1,9 +1,9 @@
-package com.qztc.parkingmanagementsystem.bo;
+package com.qztc.parkingmanagementsystem.dto;
 
 import lombok.Data;
 
 @Data
-public class UserLoginBo {
+public class UserRegDto {
 
     private Long commId;
 

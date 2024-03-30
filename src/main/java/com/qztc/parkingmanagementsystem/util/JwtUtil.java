@@ -1,45 +1,49 @@
 package com.qztc.parkingmanagementsystem.util;
 
-import com.qztc.parkingmanagementsystem.po.BUserPo;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
 
+import java.util.Calendar;
 import java.util.Date;
 
 public class JwtUtil {
-    public static final String SUBJECT = "task";
 
-    public static final long EXPIRE = 1000 * 60 * 60 * 24 * 7;
+    private final static String SECRET = "ParkingManagementSystem";
 
-    public static final String SECRET = "login";
+    public static String createToken(Long userId) {
 
-    public static final String TOKEN_PREFIX = "test";
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_YEAR, 1);
 
-    public static String genJsonWebToken(BUserPo user) {
-        if (user == null || user.getUsername() == null || user.getPassword() == null) return null;
+        String token = JWT.create().withExpiresAt(calendar.getTime())
+                .withIssuedAt(new Date())
+                .withClaim("userId", userId)
+                .sign(Algorithm.HMAC256(SECRET));
 
-        String token = Jwts.builder().setSubject(SUBJECT)
-                .claim("username", user.getUsername())
-                .claim("password", user.getPassword())
-                .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + EXPIRE))
-                .signWith(SignatureAlgorithm.HS256, SECRET).compact();
-
-        token = TOKEN_PREFIX + token;
+        System.out.println(token);
 
         return token;
     }
 
-    public static Claims checkToken(String token) {
+    public static boolean verifyToken(String token) {
         try {
-            final Claims claims = Jwts.parser().setSigningKey(SECRET).parseClaimsJws(token.replace(TOKEN_PREFIX, "")).getBody();
-
-            return claims;
+            JWT.require(Algorithm.HMAC256(SECRET)).build().verify(token);
         } catch (Exception e) {
             e.printStackTrace();
+
+            return false;
         }
 
-        return null;
+        return true;
+    }
+
+    public static Long getUserId(String token) {
+        try {
+            return JWT.require(Algorithm.HMAC256(SECRET)).build().verify(token).getClaim("username").asLong();
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            return null;
+        }
     }
 }

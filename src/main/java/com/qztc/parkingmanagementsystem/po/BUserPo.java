@@ -33,7 +33,7 @@ public class BUserPo {
 
     private String delFlag;
 
-    private String delBy;
+    private Long delBy;
 
     private Integer status;
 

@@ -5,6 +5,14 @@
 <mapper namespace="com.qztc.parkingmanagementsystem.mapper.IUserLoginMapper">
     <insert id="reg" parameterType="com.qztc.parkingmanagementsystem.po.BUserPo">
         insert into sys_user (comm_id, user_type, username, password, nick_name, sex)
-        values (#{commId}, #{username}, #{userType}, #{password}, #{nickName}, #{sex})
+        values (#{commId}, #{userType}, #{username}, #{password}, #{nickName}, #{sex})
     </insert>
+
+    <select id="login" parameterType="com.qztc.parkingmanagementsystem.dto.UserLoginDto"
+            resultType="com.qztc.parkingmanagementsystem.po.BUserPo">
+        select *
+        from sys_user
+        where username = #{username}
+          and password = #{password}
+    </select>
 </mapper>
