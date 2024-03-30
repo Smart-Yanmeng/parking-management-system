@@ -1,7 +1,7 @@
 package com.qztc.parkingmanagementsystem.mapper;
 
-import com.qztc.parkingmanagementsystem.dto.UserLoginDto;
-import com.qztc.parkingmanagementsystem.po.BUserPo;
+import com.qztc.parkingmanagementsystem.domain.dto.UserLoginDto;
+import com.qztc.parkingmanagementsystem.domain.po.BUserPo;
 
 public interface IUserLoginMapper {
 

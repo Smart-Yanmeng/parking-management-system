@@ -1,11 +1,11 @@
 package com.qztc.parkingmanagementsystem.controller;
 
-import com.qztc.parkingmanagementsystem.converter.UserRegDtoConvert;
-import com.qztc.parkingmanagementsystem.dto.UserLoginDto;
-import com.qztc.parkingmanagementsystem.dto.UserRegDto;
+import com.qztc.parkingmanagementsystem.domain.converter.UserRegDtoConvert;
+import com.qztc.parkingmanagementsystem.domain.dto.UserLoginDto;
+import com.qztc.parkingmanagementsystem.domain.dto.UserRegDto;
 import com.qztc.parkingmanagementsystem.service.impl.UserServiceImpl;
 import com.qztc.parkingmanagementsystem.util.EncUtil;
-import com.qztc.parkingmanagementsystem.vo.ResultVo;
+import com.qztc.parkingmanagementsystem.domain.vo.ResultVo;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 

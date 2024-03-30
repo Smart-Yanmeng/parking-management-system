@@ -1,7 +1,7 @@
-package com.qztc.parkingmanagementsystem.converter;
+package com.qztc.parkingmanagementsystem.domain.converter;
 
-import com.qztc.parkingmanagementsystem.bo.UserRegBo;
-import com.qztc.parkingmanagementsystem.dto.UserRegDto;
+import com.qztc.parkingmanagementsystem.domain.bo.UserRegBo;
+import com.qztc.parkingmanagementsystem.domain.dto.UserRegDto;
 import com.qztc.parkingmanagementsystem.util.ClassConvertUtil;
 import org.springframework.beans.BeanUtils;
 

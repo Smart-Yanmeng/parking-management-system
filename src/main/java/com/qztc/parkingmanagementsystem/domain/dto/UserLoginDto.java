@@ -1,4 +1,4 @@
-package com.qztc.parkingmanagementsystem.dto;
+package com.qztc.parkingmanagementsystem.domain.dto;
 
 import lombok.Data;
 

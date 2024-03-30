@@ -1,10 +1,10 @@
 package com.qztc.parkingmanagementsystem.service.impl;
 
-import com.qztc.parkingmanagementsystem.bo.UserRegBo;
-import com.qztc.parkingmanagementsystem.converter.UserRegBoConvert;
-import com.qztc.parkingmanagementsystem.dto.UserLoginDto;
+import com.qztc.parkingmanagementsystem.domain.bo.UserRegBo;
+import com.qztc.parkingmanagementsystem.domain.converter.UserRegBoConvert;
+import com.qztc.parkingmanagementsystem.domain.dto.UserLoginDto;
 import com.qztc.parkingmanagementsystem.mapper.IUserLoginMapper;
-import com.qztc.parkingmanagementsystem.po.BUserPo;
+import com.qztc.parkingmanagementsystem.domain.po.BUserPo;
 import com.qztc.parkingmanagementsystem.service.IUserService;
 import com.qztc.parkingmanagementsystem.util.JwtUtil;
 import jakarta.annotation.Resource;

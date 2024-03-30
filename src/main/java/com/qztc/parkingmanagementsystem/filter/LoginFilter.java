@@ -2,7 +2,7 @@ package com.qztc.parkingmanagementsystem.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.qztc.parkingmanagementsystem.util.JwtUtil;
-import com.qztc.parkingmanagementsystem.vo.ResultVo;
+import com.qztc.parkingmanagementsystem.domain.vo.ResultVo;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;

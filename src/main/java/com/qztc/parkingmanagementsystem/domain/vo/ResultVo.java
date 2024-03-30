@@ -1,4 +1,4 @@
-package com.qztc.parkingmanagementsystem.vo;
+package com.qztc.parkingmanagementsystem.domain.vo;
 
 import lombok.Data;
 
