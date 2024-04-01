@@ -1,5 +1,6 @@
 package com.qztc.parkingmanagementsystem.domain.vo;
 
+import com.qztc.parkingmanagementsystem.domain.emuns.HttpCodeEnum;
 import lombok.Data;
 
 @Data
@@ -38,6 +39,23 @@ public class ResultVo<T> {
         ResultVo resultVo = new ResultVo();
         resultVo.setCode(500);
         resultVo.setMsg(msg);
+
+        return resultVo;
+    }
+
+    public static ResultVo error(Integer code,String msg) {
+        ResultVo resultVo = new ResultVo();
+        resultVo.setCode(code);
+        resultVo.setMsg(msg);
+
+        return resultVo;
+    }
+
+
+    public static ResultVo error(HttpCodeEnum httpCodeEnum) {
+        ResultVo resultVo = new ResultVo();
+        resultVo.setCode(httpCodeEnum.getCode());
+        resultVo.setMsg(httpCodeEnum.getMsg());
 
         return resultVo;
     }

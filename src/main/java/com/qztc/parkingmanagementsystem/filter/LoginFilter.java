@@ -1,6 +1,7 @@
 package com.qztc.parkingmanagementsystem.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.qztc.parkingmanagementsystem.domain.emuns.HttpCodeEnum;
 import com.qztc.parkingmanagementsystem.util.JwtUtil;
 import com.qztc.parkingmanagementsystem.domain.vo.ResultVo;
 import jakarta.servlet.*;
@@ -26,13 +27,21 @@ public class LoginFilter implements Filter {
 
         if (token == null || token.isEmpty()) {
             servletResponse.setContentType("text/html;charset=utf-8");
-            ResultVo resultVo = ResultVo.error("登录过期，请重新登录");
+            ResultVo resultVo = ResultVo.error(HttpCodeEnum.UNAUTHORIZED);
             servletResponse.getWriter().write(new ObjectMapper().writeValueAsString(resultVo));
-
             return;
         }
 
         Long userId = JwtUtil.getUserId(token);
+
+        if (userId == null) {
+            servletResponse.setContentType("text/html;charset=utf-8");
+            ResultVo resultVo = ResultVo.error(HttpCodeEnum.UNAUTHORIZED);
+            servletResponse.getWriter().write(new ObjectMapper().writeValueAsString(resultVo));
+            return;
+        }
+
+
 
         System.out.println(userId);
         filterChain.doFilter(servletRequest, servletResponse);
