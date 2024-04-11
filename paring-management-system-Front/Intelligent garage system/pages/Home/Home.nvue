@@ -1,0 +1,283 @@
+<template>
+	<view class="content">
+		<map id="map" class="map" style="width: 750rpx; height: 500rpx;" :latitude="latitude" :longitude="longitude"
+			:markers="covers" :polyline="PlanList" :enable-3D="true" :enable-overlooking="true" :show-compass="true">
+		</map>
+		<button @click="lineTest">WAW</button>
+		<button @click="test">awa</button>
+
+		<text>纬度： {{latitude}}</text>
+		<text>经度： {{longitude}}</text>
+
+		<text>罗盘</text>
+		<text>方向角度:{{cmp_direction}}</text>
+		<button size="default" type="default" @click="compassStart()">罗盘-启动</button>
+		<button size="default" type="default" @click="compassStop()">罗盘-停止</button>
+	</view>
+</template>
+
+<script>
+	import app from '@/App.vue'
+	export default {
+		data() {
+			return {
+				id: 0, // 使用 marker点击事件 需要填写id
+				title: 'map',
+				latitude: 0,
+				longitude: 0,
+				covers: [],
+				PlanList: [],
+				Enable3D: true,
+				cmp_direction: 0.0, // 0度：正北，90度：正东，180度：正南，270度：正西
+			}
+		},
+		onLoad() {
+			this.getline()
+			// this.updateLocationChange()
+
+		},
+		onHide() {
+			uni.stopLocationUpdate()
+		},
+		methods: {
+
+			// 罗盘
+			compassStart(res) {
+				uni.onCompassChange((res) => {
+						this.cmp_direction = parseInt(res.direction)
+						// console.log(res.direction)
+						// console.log(this.covers[0].rotate)
+						this.covers = [{
+							id: 0,
+							width: 25,
+							height: 25,
+							longitude: this.longitude,
+							latitude: this.latitude,
+							iconPath: '../../static/location2.png',
+							rotate: Number(this.cmp_direction)
+						}]
+						console.log(this.covers)
+					}),
+					uni.startCompass(),
+					uni.showToast({
+						title: '罗盘启动',
+						icon: 'success'
+					})
+			},
+			compassStop(res) {
+				uni.stopCompass()
+			},
+
+			getline() {
+				uni.getLocation({
+					type: 'gcj02', // 坐标类型，默认为wgs84，可选的值为gcj02和bd09ll
+					isHighAccuracy: true,
+					highAccuracyExpireTime: 5000,
+					accuracy: "best",
+					success: res => {
+						// 获取成功，经度和纬度在res.longitude和res.latitude中
+						this.latitude = res.latitude
+						this.longitude = res.longitude
+						console.log('精度', res.accuracy)
+						this.covers = [{
+							id: 0,
+							width: 25,
+							height: 25,
+							longitude: this.longitude,
+							latitude: this.latitude,
+							iconPath: '../../static/location2.png',
+							rotate: Number(this.cmp_direction)
+						}]
+						let params =
+							`origin=${res.longitude},${res.latitude}&destination=118.656892,24.872813&key=0abe4280e4085bada3679b1bb86d4a63`
+						console.log(params)
+
+						uni.request({
+							url: `https://restapi.amap.com/v3/direction/driving?${params}`,
+							success: (res) => {
+								let data = res.data.route
+								if (data.paths && data.paths[0] && data.paths[0]
+									.steps) {
+									console.log(data.paths[0].steps)
+									washData(data.paths[0].steps)
+								}
+							}
+						});
+						let planList = []
+						const washData = (steps) => {
+							let points = []
+							steps.forEach(item => {
+								const polen = item.polyline.split(';')
+								polen.forEach(vv => {
+									let splits = vv.split(',')
+									points.push({
+										longitude: parseFloat(splits[
+											0]),
+										latitude: parseFloat(splits[1])
+									})
+								})
+							})
+
+							planList.value = [{
+								points: points,
+								width: 6,
+								arrowLine: true,
+								arrowIconPath: true,
+								color: '#4aa1f1',
+								dottedLine: true,
+								arrowLine: true,
+							}]
+							this.PlanList = planList.value
+							console.log(this.PlanList)
+						}
+					},
+					fail: err => {
+						// 获取失败，err为错误信息
+						console.log('getLocation err:', err);
+					}
+				});
+
+			},
+
+			test() {
+				var ps = {
+					points: [{
+						"longitude": 118.607118,
+						"latitude": 24.904821
+					}],
+					width: 6,
+					arrowLine: true,
+					arrowIconPath: true,
+					color: '#4aa1f1',
+					dottedLine: true,
+					arrowLine: true,
+				}
+				var points = this.PlanList[0].points
+				console.log(points)
+				points.splice(0, 2)
+				console.log(points)
+				this.PlanList = this.PlanList.concat(ps)
+			},
+			//监听位置变化
+			updateLocationChange() {
+				uni.startLocationUpdate({
+					type: 'gcj02',
+					success: res => {
+						console.log('1243', res)
+						var that = this
+						uni.onLocationChange(function(res2) {
+							console.log('纬度：' + res2.latitude);
+							console.log('经度：' + res2.longitude);
+							console.log('精度', res2.accuracy)
+							that.longitude = res2.longitude
+							that.latitude = res2.latitude
+							//httpApi.syncLocation(res2.latitude, res2.longitude).then(); //调用上传位置接口 自行修改
+						});
+
+					},
+					fail: err => console.error('开启接收位置消息失败：', err),
+					complete: msg => console.log('调用开启接收位置消息 API 完成')
+				});
+
+			},
+			lineTest() {
+				const mapcontext = uni.createMapContext("map")
+				mapcontext.moveAlong({
+					markerId: 0,
+					"path": [{
+							"longitude": 118.669853,
+							"latitude": 24.868236
+						},
+						{
+							"longitude": 118.669751,
+							"latitude": 24.868245
+						},
+						{
+							"longitude": 118.66967,
+							"latitude": 24.868234
+						},
+						{
+							"longitude": 118.669525,
+							"latitude": 24.868127
+						},
+						{
+							"longitude": 118.669295,
+							"latitude": 24.867929
+						},
+						{
+							"longitude": 118.66922,
+							"latitude": 24.867827
+						},
+						{
+							"longitude": 118.669214,
+							"latitude": 24.867698
+						},
+						{
+							"longitude": 118.66923,
+							"latitude": 24.867537
+						},
+						{
+							"longitude": 118.66922,
+							"latitude": 24.867478
+						},
+						{
+							"longitude": 118.66907,
+							"latitude": 24.867317
+						},
+						{
+							"longitude": 118.669026,
+							"latitude": 24.867253
+						},
+						{
+							"longitude": 118.668994,
+							"latitude": 24.86714
+						},
+						{
+							"longitude": 118.668951,
+							"latitude": 24.866818
+						},
+						{
+							"longitude": 118.668769,
+							"latitude": 24.866502
+						},
+						{
+							"longitude": 118.668678,
+							"latitude": 24.866384
+						},
+						{
+							"longitude": 118.66849,
+							"latitude": 24.866137
+						}
+					],
+					duration: 10000
+				})
+			}
+		}
+	}
+</script>
+
+<style>
+	.content {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.text-area {
+		display: flex;
+		justify-content: center;
+	}
+
+	.title {
+		font-size: 36rpx;
+		color: #8f8f94;
+	}
+
+	.container {
+		padding: 0px;
+		margin: 0px;
+		width: 100%;
+		height: 800px;
+	}
+</style>
