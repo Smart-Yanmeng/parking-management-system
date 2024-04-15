@@ -1,6 +1,6 @@
 <template>
 	<view>
-		
+		<u-button @click="ToLogin">返回登录</u-button>
 	</view>
 </template>
 
@@ -12,7 +12,12 @@
 			}
 		},
 		methods: {
-			
+			ToLogin()
+			{
+				uni.navigateTo({
+					url:'/pages/login/login'
+				})
+			}
 		}
 	}
 </script>

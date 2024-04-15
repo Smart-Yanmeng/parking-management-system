@@ -1,5 +1,5 @@
 <template>
-	<view class="LoginContent">
+	<view>
 		<view class="loginPart">
 			<u-form :model="form" ref="uForm">
 				<u-form-item label="手机" prop="phone">
@@ -9,12 +9,8 @@
 					<u-input v-model="form.password" placeholder="请输入密码" type="password" :password-icon="true" />
 				</u-form-item>
 			</u-form>
-			<u-button type="primary" @click="submit">登录</u-button>
+			<u-button type="primary" @click="submit">注册</u-button>
 		</view>
-		<view class="registerPart">
-			<text @click="ToRegiser">立即注册</text>
-		</view>
-
 	</view>
 </template>
 
@@ -31,7 +27,7 @@
 						required: true,
 						message: '请输入手机号',
 						trigger: ['change', 'blur'],
-					}, {
+					},, {
 						// 自定义验证函数，见上说明
 						validator: (rule, value, callback) => {
 							// 上面有说，返回true表示校验通过，返回false表示不通过
@@ -41,32 +37,16 @@
 						message: '手机号码不正确',
 						// 触发器可以同时用blur和change
 						trigger: ['change', 'blur'],
-					}],
-					password: [{
-						required: true,
-						message: '请输入密码',
-						trigger: ['change', 'blur'],
 					}]
 				}
 			}
-		},
-		onLoad() {
-
 		},
 		onReady() {
 			this.$refs.uForm.setRules(this.rules);
 		},
 		methods: {
 			submit() {
-				// this.$refs.uForm.validate(valid => {
-				// console.log(valid)
-				// });
-				console.log(123)
-			},
-			ToRegiser() {
-				uni.navigateTo({
-					url: '/pages/register/register'
-				})
+
 			}
 		}
 	}

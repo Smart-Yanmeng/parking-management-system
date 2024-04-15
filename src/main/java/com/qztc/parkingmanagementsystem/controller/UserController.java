@@ -6,11 +6,13 @@ import com.qztc.parkingmanagementsystem.domain.dto.UserRegDto;
 import com.qztc.parkingmanagementsystem.service.impl.UserServiceImpl;
 import com.qztc.parkingmanagementsystem.util.EncUtil;
 import com.qztc.parkingmanagementsystem.domain.vo.ResultVo;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/parking/user")
+@Tag(name = "用户管理")
 public class UserController {
 
     @Resource

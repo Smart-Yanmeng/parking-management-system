@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "@amap/amap-jsapi-loader": "^1.0.1",
+    "async-validator": "^4.2.5",
     "uview-ui": "^2.0.37"
   }
 }
