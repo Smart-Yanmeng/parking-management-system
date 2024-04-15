@@ -1,5 +1,6 @@
 package com.qztc.parkingmanagementsystem.controller;
 
+import com.qztc.parkingmanagementsystem.domain.dto.Point;
 import com.qztc.parkingmanagementsystem.domain.vo.ResultVo;
 import com.qztc.parkingmanagementsystem.util.MapUtil;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,8 +19,8 @@ public class TestController {
 
         @RequestMapping("/findNearestPoints")
         public ResultVo hello() {
-            List<MapUtil.Point> nearestPoints = MapUtil.findNearestPoints(new MapUtil.Point(0, 0), 3);
-            for (MapUtil.Point point : nearestPoints) {
+            List<Point> nearestPoints = MapUtil.findNearestPoints(new Point(0, 0), 3);
+            for (Point point : nearestPoints) {
                 System.out.println(point.x + " " + point.y);
             }
             return ResultVo.success(nearestPoints);

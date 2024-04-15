@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.qztc.parkingmanagementsystem.domain.emuns.HttpCodeEnum;
 import com.qztc.parkingmanagementsystem.util.JwtUtil;
 import com.qztc.parkingmanagementsystem.domain.vo.ResultVo;
+import com.qztc.parkingmanagementsystem.util.UserThreadUtil;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
@@ -18,7 +19,7 @@ public class LoginFilter implements Filter {
         String servletPath = request.getServletPath();
 
 
-        if (servletPath.equals("/parking/user/login") || servletPath.equals("/parking/user/register") || true) {
+        if (servletPath.equals("/parking/user/login") || servletPath.equals("/parking/user/register")) {
             filterChain.doFilter(servletRequest, servletResponse);
             return;
         }
@@ -46,8 +47,7 @@ public class LoginFilter implements Filter {
             servletResponse.getWriter().write(new ObjectMapper().writeValueAsString(resultVo));
             return;
         }
-
-
+        UserThreadUtil.setUserId(userId);
 
         System.out.println(userId);
         filterChain.doFilter(servletRequest, servletResponse);

@@ -42,7 +42,6 @@ public class JwtUtil {
             return JWT.require(Algorithm.HMAC256(SECRET)).build().verify(token).getClaim("username").asLong();
         } catch (Exception e) {
             e.printStackTrace();
-
             return null;
         }
     }

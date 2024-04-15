@@ -1,4 +1,6 @@
 package com.qztc.parkingmanagementsystem.util;
+import com.qztc.parkingmanagementsystem.domain.dto.Point;
+
 import java.util.*;
 
 /**
@@ -7,9 +9,9 @@ import java.util.*;
  */
 
 public class MapUtil {
-    private static Point[] points = {};
+    private static List<Point> points;
     static {
-        MapUtil.points = generateRandomPoints(1000, 0, 100, 0, 100).toArray(new Point[0]);
+        MapUtil.points = generateRandomPoints(1000, 0, 100, 0, 100);
     }
     static List<Point> generateRandomPoints(int numPoints, double minX, double maxX, double minY, double maxY) {
         List<Point> points = new ArrayList<>();
@@ -27,20 +29,10 @@ public class MapUtil {
 
 
 
-    public static void setPoints(Point[] points) {
+    public static void setPoints(List<Point> points) {
         MapUtil.points = points;
     }
 
-
-    // 数据结构表示地图上的一个点
-    public static class Point {
-        public double x;
-        public double y;
-        public Point(double x, double y) {
-            this.x = x;
-            this.y = y;
-        }
-    }
 
     // 计算两点之间的欧几里得距离
     static double distance(Point p1, Point p2) {
