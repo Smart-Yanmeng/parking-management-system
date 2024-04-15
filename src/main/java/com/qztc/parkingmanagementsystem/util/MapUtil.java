@@ -1,18 +1,16 @@
 package com.qztc.parkingmanagementsystem.util;
+
 import com.qztc.parkingmanagementsystem.domain.dto.Point;
 
 import java.util.*;
 
-/**
- * @author congyijiu
- * @create 2024-04-15-11:38
- */
-
 public class MapUtil {
     private static List<Point> points;
+
     static {
         MapUtil.points = generateRandomPoints(1000, 0, 100, 0, 100);
     }
+
     static List<Point> generateRandomPoints(int numPoints, double minX, double maxX, double minY, double maxY) {
         List<Point> points = new ArrayList<>();
         Random random = new Random();
@@ -26,13 +24,9 @@ public class MapUtil {
         return points;
     }
 
-
-
-
     public static void setPoints(List<Point> points) {
         MapUtil.points = points;
     }
-
 
     // 计算两点之间的欧几里得距离
     static double distance(Point p1, Point p2) {

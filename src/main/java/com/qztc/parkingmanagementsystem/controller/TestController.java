@@ -3,6 +3,7 @@ package com.qztc.parkingmanagementsystem.controller;
 import com.qztc.parkingmanagementsystem.domain.dto.Point;
 import com.qztc.parkingmanagementsystem.domain.vo.ResultVo;
 import com.qztc.parkingmanagementsystem.util.MapUtil;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,6 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/test")
+@Tag(name = "测试接口")
 public class TestController {
 
         @RequestMapping("/findNearestPoints")

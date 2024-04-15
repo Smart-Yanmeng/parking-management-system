@@ -15,8 +15,6 @@ public enum HttpCodeEnum {
 
     private String msg;
 
-
-
     HttpCodeEnum(Integer code, String msg) {
         this.code = code;
         this.msg = msg;
@@ -29,8 +27,4 @@ public enum HttpCodeEnum {
     public String getMsg() {
         return msg;
     }
-
-
-
-
 }

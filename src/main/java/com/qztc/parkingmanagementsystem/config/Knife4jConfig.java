@@ -13,12 +13,12 @@ public class Knife4jConfig {
     @Bean
     public OpenAPI springShopOpenAPI() {
         return new OpenAPI()
-                .info(new Info().title("uniproject")
-                        .description(" uniprojectAPI文档")
-                        .version("v1")
+                .info(new Info().title("Parking-Management-System API")
+                        .description("Springboot3.2.4 with Knife4j 3.0.0 API")
+                        .version("v0.0.1")
                         .license(new License().name("Apache 2.0").url("http://springdoc.org")))
                 .externalDocs(new ExternalDocumentation()
-                        .description("外部文档")
+                        .description("API文档")
                         .url("https://congyijiu.wenlingyun.com/doc.html"));
     }
 }

@@ -9,5 +9,5 @@ import java.util.List;
  * @create 2024-04-15-16:06
  */
 public interface ICommMapper {
-    List<Point>  selectAll();
+    List<Point> selectAll();
 }

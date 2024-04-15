@@ -43,13 +43,12 @@ public class ResultVo<T> {
         return resultVo;
     }
 
-    public static ResultVo error(Integer code,String msg) {
+    public static ResultVo error(Integer code, String msg) {
         ResultVo resultVo = new ResultVo();
         resultVo.setCode(code);
         resultVo.setMsg(msg);
         return resultVo;
     }
-
 
     public static ResultVo error(HttpCodeEnum httpCodeEnum) {
         ResultVo resultVo = new ResultVo();
