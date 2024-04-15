@@ -14,8 +14,9 @@ public class ResultVo<T> {
 
     public static ResultVo success() {
         ResultVo resultVo = new ResultVo();
-        resultVo.setCode(200);
-        resultVo.setMsg("success");
+        HttpCodeEnum httpCodeEnum = HttpCodeEnum.SUCCESS;
+        resultVo.setCode(httpCodeEnum.getCode());
+        resultVo.setMsg(httpCodeEnum.getMsg());
 
         return resultVo;
     }
@@ -23,14 +24,14 @@ public class ResultVo<T> {
     public static ResultVo success(Object data) {
         ResultVo resultVo = success();
         resultVo.setData(data);
-
         return resultVo;
     }
 
     public static ResultVo error() {
         ResultVo resultVo = new ResultVo();
-        resultVo.setCode(500);
-        resultVo.setMsg("error");
+        HttpCodeEnum httpCodeEnum = HttpCodeEnum.ERROR;
+        resultVo.setCode(httpCodeEnum.getCode());
+        resultVo.setMsg(httpCodeEnum.getMsg());
 
         return resultVo;
     }
@@ -39,7 +40,6 @@ public class ResultVo<T> {
         ResultVo resultVo = new ResultVo();
         resultVo.setCode(500);
         resultVo.setMsg(msg);
-
         return resultVo;
     }
 
@@ -47,7 +47,6 @@ public class ResultVo<T> {
         ResultVo resultVo = new ResultVo();
         resultVo.setCode(code);
         resultVo.setMsg(msg);
-
         return resultVo;
     }
 
@@ -56,7 +55,6 @@ public class ResultVo<T> {
         ResultVo resultVo = new ResultVo();
         resultVo.setCode(httpCodeEnum.getCode());
         resultVo.setMsg(httpCodeEnum.getMsg());
-
         return resultVo;
     }
 }

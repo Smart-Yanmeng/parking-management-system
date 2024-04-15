@@ -17,9 +17,15 @@ public class LoginFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         String servletPath = request.getServletPath();
 
-        if (servletPath.equals("/parking/user/login") || servletPath.equals("/parking/user/register")) {
-            filterChain.doFilter(servletRequest, servletResponse);
 
+        if (servletPath.equals("/parking/user/login") || servletPath.equals("/parking/user/register") || true) {
+            filterChain.doFilter(servletRequest, servletResponse);
+            return;
+        }
+
+        //todo: 测试用，后续删除
+        if (true){
+            filterChain.doFilter(servletRequest, servletResponse);
             return;
         }
 
