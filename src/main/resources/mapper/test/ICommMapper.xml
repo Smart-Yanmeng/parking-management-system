@@ -9,4 +9,13 @@
         from sys_comm
     </select>
 
+    <select id="selectByIds" parameterType="java.util.List" resultType="com.qztc.parkingmanagementsystem.domain.po.BCommPo">
+        select comm_id, comm_name,addr, geo_x, geo_y
+        from sys_comm
+        where comm_id in
+        <foreach collection="list" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
 </mapper>

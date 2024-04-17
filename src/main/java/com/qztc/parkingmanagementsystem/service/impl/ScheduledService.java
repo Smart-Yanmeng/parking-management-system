@@ -3,6 +3,7 @@ package com.qztc.parkingmanagementsystem.service.impl;
 import com.qztc.parkingmanagementsystem.domain.dto.Point;
 import com.qztc.parkingmanagementsystem.mapper.ICommMapper;
 import com.qztc.parkingmanagementsystem.util.MapUtil;
+import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -24,6 +25,9 @@ public class ScheduledService {
 
 //    test,每5秒更新一次
 //    @Scheduled(cron = "0/5 * * * * ?")
+
+    //初始化方法，项目启动时更新地图上的点集合
+    @PostConstruct
     //定时任务，每天凌晨0点更新地图上的点集合
     @Scheduled(cron = "0 0 0 * * ?")
     public void updateMapPoints() {

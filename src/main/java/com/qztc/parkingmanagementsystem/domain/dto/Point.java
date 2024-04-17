@@ -8,7 +8,7 @@ import lombok.Data;
  */
 @Data
 public class Point {
-    public Integer id;
+    public Long id;
     public double x;
     public double y;
     public Point(double x, double y) {

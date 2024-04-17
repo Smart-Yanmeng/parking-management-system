@@ -1,6 +1,7 @@
 package com.qztc.parkingmanagementsystem.mapper;
 
 import com.qztc.parkingmanagementsystem.domain.dto.Point;
+import com.qztc.parkingmanagementsystem.domain.po.BCommPo;
 
 import java.util.List;
 
@@ -10,4 +11,6 @@ import java.util.List;
  */
 public interface ICommMapper {
     List<Point> selectAll();
+
+    List<BCommPo> selectByIds(List<Long> ids);
 }
