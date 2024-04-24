@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/parking/user")
+@CrossOrigin(maxAge = 3600)
 @Tag(name = "用户管理")
 public class UserController {
 
     @Resource
     UserServiceImpl userService;
 
-    @CrossOrigin
     @PostMapping("/register")
     public ResultVo register(@RequestBody UserRegDto userRegDto) {
 
@@ -28,7 +28,6 @@ public class UserController {
         return res == 1 ? ResultVo.success("注册成功") : ResultVo.error("注册失败");
     }
 
-    @CrossOrigin
     @PostMapping("/login")
     public ResultVo login(@RequestBody UserLoginDto userLoginDto) {
 
