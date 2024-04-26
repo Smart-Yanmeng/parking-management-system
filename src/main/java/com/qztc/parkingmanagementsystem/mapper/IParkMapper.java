@@ -26,4 +26,5 @@ public interface IParkMapper {
      */
     List<BPark> selectAllByCommunityIds(@Param("communityIds")List<Long> communityIds);
 
+    BPark selectById(Long parkId);
 }

@@ -29,24 +29,24 @@ public class IParkServiceImpl implements IParkService {
     @Override
     public List<BPark> findParkByCommId(Long commId, Integer hour) {
         List<BPark> bParks = iParkMapper.selectAllByCommunityId(commId);
-        return filterSpacePark(bParks);
+        return filterSpacePark(bParks, hour);
     }
 
     @Override
     public List<BPark> findParkByCommIds(List<Long> commIds, Integer hour) {
         List<BPark> bParks = iParkMapper.selectAllByCommunityIds(commIds);
-        return filterSpacePark(bParks);
+        return filterSpacePark(bParks, hour);
     }
 
     @Override
     public BPark findParkById(Long parkId) {
-        return null;
+        return iParkMapper.selectById(parkId);
     }
 
     /**
      * 筛选空闲的停车位
      */
-    private List<BPark> filterSpacePark(List<BPark> bParks) {
+    private List<BPark> filterSpacePark(List<BPark> bParks, Integer hour) {
         List<BPark> res = new ArrayList<>();
         for (BPark park : bParks) {
             //获取当前日期
@@ -62,15 +62,19 @@ public class IParkServiceImpl implements IParkService {
 
             //获取当前时间
             LocalTime currentTime = LocalTime.now().withNano(0);
+            //将时间加上hour
+            LocalTime toTime = currentTime.plusHours(hour);
+
             //获取开始时间,转化为时间
             LocalTime startTime = LocalTime.parse(today.get("start"));
             //获取结束时间,转化为时间
             LocalTime endTime = LocalTime.parse(today.get("end"));
 
-            //判断是否在空闲时间
-            if (currentTime.isAfter(startTime) && currentTime.isBefore(endTime)){
+            //判断从当前时间到hour后是否在空闲时间
+            if (currentTime.isAfter(startTime) && toTime.isBefore(endTime)){
                 res.add(park);
             }
+
         }
         return res;
     }

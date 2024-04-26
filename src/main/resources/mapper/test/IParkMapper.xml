@@ -24,4 +24,8 @@
             #{communityId}
         </foreach>
     </select>
+
+    <select id="selectById" resultType="com.qztc.parkingmanagementsystem.domain.po.BPark">
+        select * from sys_park where park_id = #{parkId}
+    </select>
 </mapper>
