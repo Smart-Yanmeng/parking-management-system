@@ -1,11 +1,9 @@
 package com.qztc.parkingmanagementsystem.util;
-
+import java.util.concurrent.ThreadLocalRandom;
 /**
  * @author congyijiu
  * @create 2024-04-26-17:52
  */
-import java.util.concurrent.ThreadLocalRandom;
-
 public class RandomScheduleGenerator {
 
     public static void main(String[] args) {

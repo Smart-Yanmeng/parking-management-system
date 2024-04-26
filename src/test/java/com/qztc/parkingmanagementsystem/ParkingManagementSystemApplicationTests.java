@@ -1,6 +1,7 @@
 package com.qztc.parkingmanagementsystem;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.TypeReference;
 import com.qztc.parkingmanagementsystem.domain.po.BPark;
 import com.qztc.parkingmanagementsystem.mapper.IParkMapper;
 import com.qztc.parkingmanagementsystem.util.RandomScheduleGenerator;
@@ -54,7 +55,7 @@ class ParkingManagementSystemApplicationTests {
     void selectAllParkTest() {
         List<BPark> bParks = iParkMapper.selectAll();
 
-        Map testmap = JSON.parseObject("{'a':'a'}", Map.class);
+//        Map<String,String> testmap = JSON.parseObject("{'a':'a'}", new TypeReference<Map<String, String>>(){});
 
         long startthetest = System.currentTimeMillis();
         for (BPark park : bParks) {
@@ -69,16 +70,17 @@ class ParkingManagementSystemApplicationTests {
             //获取空闲时间
             String spareTime = park.getSpareTime();
             //解析json
-            Map map = JSON.parseObject(spareTime, Map.class);
+            Map<String, Map<String, String>> map = JSON.parseObject(spareTime, new TypeReference<Map<String, Map<String, String>>>(){});
             //获取当天的空闲时间
-            Map today = (Map) map.get(week);
+            Map<String,String> today = map.get(week);
+
             log.info("今天的空闲时间：" + today);
             //获取开始时间
-            String start = (String) today.get("start");
+            String start = today.get("start");
             //转化为时间
             LocalTime startTime = LocalTime.parse(start);
             //获取结束时间,转化为时间
-            LocalTime endTime = LocalTime.parse((String) today.get("end"));
+            LocalTime endTime = LocalTime.parse(today.get("end"));
 
             //判断是否在空闲时间
             if (currentTime.isAfter(startTime) && currentTime.isBefore(endTime)){
@@ -95,7 +97,7 @@ class ParkingManagementSystemApplicationTests {
 
         log.info("测试时间：" + (endthetest - startthetest) + "ms");
 
-        /**
+        /*
          * 测试时间：130ms 当没有初始化json和map时
          * 测试时间：30ms 初始化json和map时
          */

@@ -13,17 +13,17 @@ public interface IParkService {
     /**
      * 根据小区id查找停车位,并筛选出空闲的停车位
      */
-    public List<BPark> findParkByCommId(Long commId,Integer hour);
+    List<BPark> findParkByCommId(Long commId,Integer hour);
 
     /**
      * 根据小区ids查找停车位，并筛选出空闲的停车位
      */
-    public List<BPark> findParkByCommIds(List<Long> commIds,Integer hour);
+    List<BPark> findParkByCommIds(List<Long> commIds,Integer hour);
 
     /**
      * 根据停车位id查找停车位
      */
-    public BPark findParkById(Long parkId);
+    BPark findParkById(Long parkId);
 
 
 }

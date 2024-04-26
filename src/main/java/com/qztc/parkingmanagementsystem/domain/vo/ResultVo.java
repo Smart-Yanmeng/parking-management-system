@@ -12,46 +12,37 @@ public class ResultVo<T> {
 
     private T data;
 
-    public static ResultVo success() {
-        ResultVo resultVo = new ResultVo();
-        HttpCodeEnum httpCodeEnum = HttpCodeEnum.SUCCESS;
-        resultVo.setCode(httpCodeEnum.getCode());
-        resultVo.setMsg(httpCodeEnum.getMsg());
-
-        return resultVo;
-    }
-
-    public static ResultVo success(Object data) {
-        ResultVo resultVo = success();
+    public static <T> ResultVo<T> success(T data) {
+        ResultVo<T> resultVo = new ResultVo<>();
+        resultVo.setCode(HttpCodeEnum.SUCCESS.getCode());
+        resultVo.setMsg(HttpCodeEnum.SUCCESS.getMsg());
         resultVo.setData(data);
         return resultVo;
     }
 
-    public static ResultVo error() {
-        ResultVo resultVo = new ResultVo();
-        HttpCodeEnum httpCodeEnum = HttpCodeEnum.ERROR;
-        resultVo.setCode(httpCodeEnum.getCode());
-        resultVo.setMsg(httpCodeEnum.getMsg());
-
+    public static ResultVo<?> error() {
+        ResultVo<?> resultVo = new ResultVo<>();
+        resultVo.setCode(HttpCodeEnum.ERROR.getCode());
+        resultVo.setMsg(HttpCodeEnum.ERROR.getMsg());
         return resultVo;
     }
 
-    public static ResultVo error(String msg) {
-        ResultVo resultVo = new ResultVo();
-        resultVo.setCode(500);
+    public static ResultVo<?> error(String msg) {
+        ResultVo<?> resultVo = new ResultVo<>();
+        resultVo.setCode(HttpCodeEnum.ERROR.getCode());
         resultVo.setMsg(msg);
         return resultVo;
     }
 
-    public static ResultVo error(Integer code, String msg) {
-        ResultVo resultVo = new ResultVo();
+    public static ResultVo<?> error(Integer code, String msg) {
+        ResultVo<?> resultVo = new ResultVo<>();
         resultVo.setCode(code);
         resultVo.setMsg(msg);
         return resultVo;
     }
 
-    public static ResultVo error(HttpCodeEnum httpCodeEnum) {
-        ResultVo resultVo = new ResultVo();
+    public static ResultVo<?> error(HttpCodeEnum httpCodeEnum) {
+        ResultVo<?> resultVo = new ResultVo<>();
         resultVo.setCode(httpCodeEnum.getCode());
         resultVo.setMsg(httpCodeEnum.getMsg());
         return resultVo;

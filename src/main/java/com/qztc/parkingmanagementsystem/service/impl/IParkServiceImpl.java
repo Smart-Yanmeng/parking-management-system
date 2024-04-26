@@ -1,6 +1,7 @@
 package com.qztc.parkingmanagementsystem.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.TypeReference;
 import com.qztc.parkingmanagementsystem.domain.po.BPark;
 import com.qztc.parkingmanagementsystem.mapper.IParkMapper;
 import com.qztc.parkingmanagementsystem.service.IParkService;
@@ -55,16 +56,16 @@ public class IParkServiceImpl implements IParkService {
             //获取空闲时间
             String spareTime = park.getSpareTime();
             //解析json
-            Map map = JSON.parseObject(spareTime, Map.class);
+            Map<String, Map<String, String>> map = JSON.parseObject(spareTime, new TypeReference<Map<String, Map<String, String>>>(){});
             //获取当天的空闲时间
-            Map today = (Map) map.get(week);
+            Map<String,String> today = map.get(week);
 
             //获取当前时间
             LocalTime currentTime = LocalTime.now().withNano(0);
             //获取开始时间,转化为时间
-            LocalTime startTime = LocalTime.parse((String) today.get("start"));
+            LocalTime startTime = LocalTime.parse(today.get("start"));
             //获取结束时间,转化为时间
-            LocalTime endTime = LocalTime.parse((String) today.get("end"));
+            LocalTime endTime = LocalTime.parse(today.get("end"));
 
             //判断是否在空闲时间
             if (currentTime.isAfter(startTime) && currentTime.isBefore(endTime)){
