@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qztc.parkingmanagementsystem.mapper.IParkMapper">
+
+    <select id="selectAllByCommunityId" resultType="com.qztc.parkingmanagementsystem.domain.po.BPark">
+        select * from sys_park where comm_id = #{communityId}
+    </select>
+
+    <insert id="insertPark" >
+        insert into sys_park (comm_id, park_addr, belong_by, spare_time, status, remark)
+        values (#{commId}, #{parkAddr}, #{belongBy}, #{spareTime}, #{status}, #{remark})
+    </insert>
+
+    <select id="selectAll" resultType="com.qztc.parkingmanagementsystem.domain.po.BPark">
+        select * from sys_park
+    </select>
+
+    <select id="selectAllByCommunityIds" resultType="com.qztc.parkingmanagementsystem.domain.po.BPark">
+        select * from sys_park where comm_id in
+        <foreach collection="communityIds" item="communityId" open="(" close=")" separator=",">
+            #{communityId}
+        </foreach>
+    </select>
+</mapper>
