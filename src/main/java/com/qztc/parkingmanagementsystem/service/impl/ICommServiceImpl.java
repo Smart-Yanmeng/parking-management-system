@@ -2,12 +2,12 @@ package com.qztc.parkingmanagementsystem.service.impl;
 
 import com.qztc.parkingmanagementsystem.domain.dto.Point;
 import com.qztc.parkingmanagementsystem.domain.po.BCommPo;
-import com.qztc.parkingmanagementsystem.mapper.ICommMapper;
 import com.qztc.parkingmanagementsystem.service.ICommService;
 import com.qztc.parkingmanagementsystem.util.MapUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.qztc.parkingmanagementsystem.mapper.ICommMapper;
 
 import java.util.ArrayList;
 import java.util.List;
