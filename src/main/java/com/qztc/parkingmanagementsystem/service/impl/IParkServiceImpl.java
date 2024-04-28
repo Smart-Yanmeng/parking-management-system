@@ -72,6 +72,7 @@ public class IParkServiceImpl implements IParkService {
 
             //判断从当前时间到hour后是否在空闲时间
             if (currentTime.isAfter(startTime) && toTime.isBefore(endTime)) {
+                park.setSpareTime(JSON.toJSONString(today));
                 res.add(park);
             }
         }
