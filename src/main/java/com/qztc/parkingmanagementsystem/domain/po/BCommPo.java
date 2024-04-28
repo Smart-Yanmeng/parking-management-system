@@ -1,16 +1,12 @@
 package com.qztc.parkingmanagementsystem.domain.po;
-import java.util.List;
-import com.qztc.parkingmanagementsystem.domain.po.BCommPo;
+
 import lombok.Data;
 
 import java.time.LocalDate;
 
 /**
-@author congyijiu
-@create 2024-04-22-14:55
-*/
-
-/**
+ * @author congyijiu
+ * @create 2024-04-22-14:55
  * 社区表
  */
 @Data

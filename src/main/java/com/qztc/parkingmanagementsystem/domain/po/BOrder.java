@@ -5,67 +5,65 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 /**
-@author congyijiu
-@create 2024-04-25-11:50
-*/    
-/**
-    * 订单表
-    */
+ * @author congyijiu
+ * @create 2024-04-25-11:50
+ * 订单表
+ */
 @Data
 public class BOrder {
     /**
-    * 订单ID
-    */
+     * 订单ID
+     */
     private Long orderId;
 
     /**
-    * 客户ID
-    */
+     * 客户ID
+     */
     private Long payId;
 
     /**
-    * 商家ID
-    */
+     * 商家ID
+     */
     private Long recvId;
 
     /**
-    * 车位ID
-    */
+     * 车位ID
+     */
     private Long parkId;
 
     /**
-    * 停车时长
-    */
+     * 停车时长
+     */
     private Integer parkTime;
 
     /**
-    * 租金
-    */
+     * 租金
+     */
     private Double rent;
 
     /**
-    * 创建时间
-    */
+     * 创建时间
+     */
     private LocalDateTime createTime;
 
     /**
-    * 更新时间
-    */
+     * 更新时间
+     */
     private LocalDateTime updateTime;
 
     /**
-    * 删除标志
-    */
+     * 删除标志
+     */
     private Integer delFlag;
 
     /**
-    * 状态
-    */
+     * 状态
+     */
     private Integer status;
 
     /**
-    * 备注
-    */
+     * 备注
+     */
     private String remark;
 
 }

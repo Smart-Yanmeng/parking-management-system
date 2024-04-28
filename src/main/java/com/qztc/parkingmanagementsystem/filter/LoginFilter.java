@@ -34,7 +34,7 @@ public class LoginFilter implements Filter {
 
         if (token == null || token.isEmpty()) {
             servletResponse.setContentType("text/html;charset=utf-8");
-            ResultVo resultVo = ResultVo.error(HttpCodeEnum.UNAUTHORIZED);
+            ResultVo<?> resultVo = ResultVo.error(HttpCodeEnum.UNAUTHORIZED);
             servletResponse.getWriter().write(new ObjectMapper().writeValueAsString(resultVo));
             return;
         }
@@ -43,7 +43,7 @@ public class LoginFilter implements Filter {
 
         if (userId == null) {
             servletResponse.setContentType("text/html;charset=utf-8");
-            ResultVo resultVo = ResultVo.error(HttpCodeEnum.UNAUTHORIZED);
+            ResultVo<?> resultVo = ResultVo.error(HttpCodeEnum.UNAUTHORIZED);
             servletResponse.getWriter().write(new ObjectMapper().writeValueAsString(resultVo));
             return;
         }

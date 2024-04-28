@@ -56,10 +56,10 @@ public class IParkServiceImpl implements IParkService {
             //获取空闲时间
             String spareTime = park.getSpareTime();
             //解析json
-            Map<String, Map<String, String>> map = JSON.parseObject(spareTime, new TypeReference<Map<String, Map<String, String>>>(){});
+            Map<String, Map<String, String>> map = JSON.parseObject(spareTime, new TypeReference<Map<String, Map<String, String>>>() {
+            });
             //获取当天的空闲时间
-            Map<String,String> today = map.get(week);
-
+            Map<String, String> today = map.get(week);
             //获取当前时间
             LocalTime currentTime = LocalTime.now().withNano(0);
             //将时间加上hour
@@ -71,10 +71,9 @@ public class IParkServiceImpl implements IParkService {
             LocalTime endTime = LocalTime.parse(today.get("end"));
 
             //判断从当前时间到hour后是否在空闲时间
-            if (currentTime.isAfter(startTime) && toTime.isBefore(endTime)){
+            if (currentTime.isAfter(startTime) && toTime.isBefore(endTime)) {
                 res.add(park);
             }
-
         }
         return res;
     }

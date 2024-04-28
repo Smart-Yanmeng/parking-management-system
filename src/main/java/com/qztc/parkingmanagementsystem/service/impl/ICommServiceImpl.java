@@ -4,13 +4,14 @@ import com.qztc.parkingmanagementsystem.domain.dto.Point;
 import com.qztc.parkingmanagementsystem.domain.po.BCommPo;
 import com.qztc.parkingmanagementsystem.service.ICommService;
 import com.qztc.parkingmanagementsystem.util.MapUtil;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.qztc.parkingmanagementsystem.mapper.ICommMapper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author congyijiu
@@ -21,18 +22,16 @@ import java.util.List;
 @Slf4j
 public class ICommServiceImpl implements ICommService {
 
-    @Autowired
+    @Resource
     private ICommMapper iCommMapper;
 
     @Override
     public List<BCommPo> findNearestComm(Point point, int num) {
         List<Point> nearestPoints = MapUtil.findNearestPoints(point, num);
-        List<Long> ids = new ArrayList<>();
-        for (Point p : nearestPoints) {
-            log.info(p.x + " " + p.y);
-            ids.add(p.id);
-        }
-        List<BCommPo> bCommPos = iCommMapper.selectByIds(ids);
-        return bCommPos;
+        List<Long> ids = nearestPoints.stream()
+                .peek(p -> log.info(p.x + " " + p.y))
+                .map(p -> p.id)
+                .collect(Collectors.toList());
+        return iCommMapper.selectByIds(ids);
     }
 }
