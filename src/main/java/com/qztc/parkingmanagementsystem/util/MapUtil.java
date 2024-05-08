@@ -5,12 +5,7 @@ import com.qztc.parkingmanagementsystem.domain.dto.Point;
 import java.util.*;
 
 public class MapUtil {
-    private static List<Point> points;
-
-    static {
-        MapUtil.points = generateRandomPoints(1000, 0, 100, 0, 100);
-    }
-
+    private List<Point> points;
     static List<Point> generateRandomPoints(int numPoints, double minX, double maxX, double minY, double maxY) {
         List<Point> points = new ArrayList<>();
         Random random = new Random();
@@ -24,9 +19,6 @@ public class MapUtil {
         return points;
     }
 
-    public static void setPoints(List<Point> points) {
-        MapUtil.points = points;
-    }
 
     // 计算两点之间的欧几里得距离
     static double distance(Point p1, Point p2) {
@@ -36,7 +28,13 @@ public class MapUtil {
     }
 
     // 找到地图上距离给定点最近的几个点
-    public static List<Point> findNearestPoints(Point target, int k) {
+    public static List<Point> findNearestPoints(List<Point> points,Point target, int k) throws RuntimeException {
+
+        //校验入参
+        if (points == null || points.isEmpty() || target == null || k <= 0) {
+            throw new RuntimeException("小区地图数据为空或者目标点为空或者k值不合法");
+        }
+
         PriorityQueue<Point> pq = new PriorityQueue<>(k, (p1, p2) -> {
             double dist1 = distance(p1, target);
             double dist2 = distance(p2, target);
@@ -60,7 +58,8 @@ public class MapUtil {
     public static void main(String[] args) {
         Point target = new Point(50, 50);
         double start = System.currentTimeMillis();
-        List<Point> nearestPoints = findNearestPoints(target, 10);
+        List<Point> points = generateRandomPoints(1000, 0, 100, 0, 100);
+        List<Point> nearestPoints = findNearestPoints(points,target, 5);
         double end = System.currentTimeMillis();
         System.out.println("Time: " + (end - start) + "ms");
         for (Point point : nearestPoints) {

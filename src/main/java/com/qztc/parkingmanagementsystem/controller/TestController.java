@@ -3,6 +3,7 @@ package com.qztc.parkingmanagementsystem.controller;
 import com.qztc.parkingmanagementsystem.domain.dto.Point;
 import com.qztc.parkingmanagementsystem.domain.po.BCommPo;
 import com.qztc.parkingmanagementsystem.domain.vo.ResultVo;
+import com.qztc.parkingmanagementsystem.scache.CommMap;
 import com.qztc.parkingmanagementsystem.service.ICommService;
 import com.qztc.parkingmanagementsystem.util.MapUtil;
 import io.swagger.v3.oas.annotations.Operation;
@@ -32,7 +33,7 @@ public class TestController {
     @GetMapping("/findNearestPoints")
     @Operation(summary = "查找最近的点")
     public ResultVo<List<Point>> findNearestPoints() {
-        List<Point> nearestPoints = MapUtil.findNearestPoints(new Point(0, 0), 5);
+        List<Point> nearestPoints = MapUtil.findNearestPoints(CommMap.getPoints(),new Point(0, 0), 5);
         nearestPoints.forEach(p -> log.info("x:{} y:{}", p.x, p.y));
         return ResultVo.success(nearestPoints);
     }

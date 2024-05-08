@@ -2,6 +2,7 @@ package com.qztc.parkingmanagementsystem.service.impl;
 
 import com.qztc.parkingmanagementsystem.domain.dto.Point;
 import com.qztc.parkingmanagementsystem.domain.po.BCommPo;
+import com.qztc.parkingmanagementsystem.scache.CommMap;
 import com.qztc.parkingmanagementsystem.service.ICommService;
 import com.qztc.parkingmanagementsystem.util.MapUtil;
 import jakarta.annotation.Resource;
@@ -27,7 +28,7 @@ public class ICommServiceImpl implements ICommService {
 
     @Override
     public List<BCommPo> findNearestComm(Point point, int num) {
-        List<Point> nearestPoints = MapUtil.findNearestPoints(point, num);
+        List<Point> nearestPoints = MapUtil.findNearestPoints(CommMap.getPoints(),point, num);
         List<Long> ids = nearestPoints.stream()
                 .peek(p -> log.info(p.x + " " + p.y))
                 .map(p -> p.id)

@@ -1,6 +1,7 @@
 package com.qztc.parkingmanagementsystem.controller;
 
 import com.qztc.parkingmanagementsystem.domain.dto.CommParkDto;
+import com.qztc.parkingmanagementsystem.domain.dto.Point;
 import com.qztc.parkingmanagementsystem.domain.po.BCommPo;
 import com.qztc.parkingmanagementsystem.domain.po.BPark;
 import com.qztc.parkingmanagementsystem.domain.vo.CommParkVo;
@@ -11,6 +12,7 @@ import com.qztc.parkingmanagementsystem.service.IParkService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
+import jakarta.validation.Valid;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
@@ -36,16 +38,11 @@ public class ParkController {
 
     @PostMapping("/park")
     @Operation(summary = "我要停车")
-    public ResultVo park(@RequestBody CommParkDto commParkDto) {
-        if (commParkDto == null) {
-            return ResultVo.error("参数错误");
-        }
-        if (commParkDto.getPoint() == null || commParkDto.getParkTime() == null) {
-            return ResultVo.error("参数错误");
-        }
+    public ResultVo park(@RequestBody @Valid CommParkDto commParkDto) {
 
+        Point point = new Point(commParkDto.getX(), commParkDto.getY());
 
-        List<BCommPo> nearestComm = commService.findNearestComm(commParkDto.getPoint(), 5);
+        List<BCommPo> nearestComm = commService.findNearestComm(point, 5);
         if (nearestComm == null || nearestComm.isEmpty()) {
             return ResultVo.error("附近没有小区");
         }

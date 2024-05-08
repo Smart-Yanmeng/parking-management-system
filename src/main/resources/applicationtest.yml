@@ -5,9 +5,9 @@ spring:
   application:
     name: parking-management-system
   datasource:
-    url: jdbc:mysql://19mysql.mysql.database.azure.com/parking_management_system
-    username: congyijiu
-    password: cyj1995%
+    url:
+    username:
+    password:
     driver-class-name: com.mysql.cj.jdbc.Driver
 
 mybatis:
@@ -25,9 +25,9 @@ springdoc:
   api-docs:
     path: /v3/api-docs
   group-configs:
-      paths-to-match: '/**'
-      #生成文档所需的扫包路径，一般为启动类目录
-      packages-to-scan: com.qztc.parkingmanagementsystem
+    paths-to-match: '/**'
+    #生成文档所需的扫包路径，一般为启动类目录
+    packages-to-scan: com.qztc.parkingmanagementsystem
 
 
 #knife4j配置

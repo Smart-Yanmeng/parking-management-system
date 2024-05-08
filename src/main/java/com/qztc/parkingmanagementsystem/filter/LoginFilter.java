@@ -8,10 +8,12 @@ import com.qztc.parkingmanagementsystem.util.UserThreadUtil;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 
 @WebFilter
+@Slf4j
 public class LoginFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
@@ -38,18 +40,17 @@ public class LoginFilter implements Filter {
             servletResponse.getWriter().write(new ObjectMapper().writeValueAsString(resultVo));
             return;
         }
-
         Long userId = JwtUtil.getUserId(token);
-
         if (userId == null) {
             servletResponse.setContentType("text/html;charset=utf-8");
             ResultVo<?> resultVo = ResultVo.error(HttpCodeEnum.UNAUTHORIZED);
             servletResponse.getWriter().write(new ObjectMapper().writeValueAsString(resultVo));
             return;
         }
-        UserThreadUtil.setUserId(userId);
 
-        System.out.println(userId);
+        UserThreadUtil.setUserId(userId);
+        log.info("userId:{}", userId);
         filterChain.doFilter(servletRequest, servletResponse);
+        UserThreadUtil.remove();
     }
 }

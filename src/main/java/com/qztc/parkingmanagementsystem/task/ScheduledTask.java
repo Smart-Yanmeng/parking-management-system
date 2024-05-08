@@ -1,6 +1,7 @@
-package com.qztc.parkingmanagementsystem.service.impl;
+package com.qztc.parkingmanagementsystem.task;
 
 import com.qztc.parkingmanagementsystem.domain.dto.Point;
+import com.qztc.parkingmanagementsystem.scache.CommMap;
 import com.qztc.parkingmanagementsystem.util.MapUtil;
 import com.qztc.parkingmanagementsystem.mapper.ICommMapper;
 
@@ -19,7 +20,7 @@ import java.util.List;
 
 @Component
 @Slf4j
-public class ScheduledService {
+public class ScheduledTask {
 
     @Resource
     private ICommMapper iCommMapper;
@@ -35,7 +36,7 @@ public class ScheduledService {
     public void updateMapPoints() {
         log.info("更新地图上的点集合");
         List<Point> points = iCommMapper.selectAll();
-        MapUtil.setPoints(points);
+        CommMap.setPoints(points);
         log.info("更新地图上的点集合成功");
     }
 }
