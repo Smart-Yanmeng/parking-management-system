@@ -11,11 +11,10 @@ import lombok.Data;
 
 @Data
 public class CommParkDto {
-
-    @NotNull
+    @NotNull(message = "x坐标不能为空")
     private double x;
-    @NotNull
+    @NotNull(message = "y坐标不能为空")
     private double y;
-    @NotNull
+    @NotNull(message = "预计停车时长不能为空")
     private Integer parkTime;
 }

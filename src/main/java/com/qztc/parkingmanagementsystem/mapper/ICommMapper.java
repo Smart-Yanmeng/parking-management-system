@@ -1,7 +1,7 @@
 package com.qztc.parkingmanagementsystem.mapper;
 
 
-import com.qztc.parkingmanagementsystem.domain.dto.Point;
+import com.qztc.parkingmanagementsystem.domain.po.Point;
 import com.qztc.parkingmanagementsystem.domain.po.BCommPo;
 
 import java.util.List;

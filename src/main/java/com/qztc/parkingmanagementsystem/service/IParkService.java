@@ -1,6 +1,8 @@
 package com.qztc.parkingmanagementsystem.service;
 
+import com.qztc.parkingmanagementsystem.domain.dto.ParkShareDto;
 import com.qztc.parkingmanagementsystem.domain.po.BPark;
+import com.qztc.parkingmanagementsystem.domain.vo.ResultVo;
 
 import java.util.List;
 
@@ -26,4 +28,8 @@ public interface IParkService {
     BPark findParkById(Long parkId);
 
 
+    /**
+     * 分享停车位
+     */
+    ResultVo parkShare(ParkShareDto parkShareDto);
 }

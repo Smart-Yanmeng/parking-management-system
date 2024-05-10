@@ -1,6 +1,6 @@
 package com.qztc.parkingmanagementsystem.util;
 
-import com.qztc.parkingmanagementsystem.domain.dto.Point;
+import com.qztc.parkingmanagementsystem.domain.po.Point;
 
 import java.util.*;
 

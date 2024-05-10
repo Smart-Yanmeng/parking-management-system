@@ -1,7 +1,8 @@
 package com.qztc.parkingmanagementsystem.scache;
 
-import com.qztc.parkingmanagementsystem.domain.dto.Point;
+import com.qztc.parkingmanagementsystem.domain.po.Point;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,11 +11,9 @@ import java.util.List;
  */
 public class CommMap {
 
-    private static List<Point> points;
+    private static List<Point> points = new ArrayList<>();
 
     public static List<Point> getPoints() {
-        if (points == null)
-            throw new RuntimeException("points is null");
         return points;
     }
 

@@ -2,11 +2,14 @@ package com.qztc.parkingmanagementsystem.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
+import com.qztc.parkingmanagementsystem.domain.dto.ParkShareDto;
 import com.qztc.parkingmanagementsystem.domain.po.BPark;
+import com.qztc.parkingmanagementsystem.domain.vo.ResultVo;
 import com.qztc.parkingmanagementsystem.mapper.IParkMapper;
 import com.qztc.parkingmanagementsystem.service.IParkService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalTime;
@@ -21,7 +24,8 @@ import java.util.Map;
  */
 @Service
 @Slf4j
-public class IParkServiceImpl implements IParkService {
+public class IParkServiceImpl
+        implements IParkService {
 
     @Resource
     private IParkMapper iParkMapper;
@@ -41,6 +45,21 @@ public class IParkServiceImpl implements IParkService {
     @Override
     public BPark findParkById(Long parkId) {
         return iParkMapper.selectById(parkId);
+    }
+
+    @Override
+    public ResultVo parkShare(ParkShareDto parkShareDto) {
+        String spareTime = strToJSONstr(parkShareDto.getSpareTime());
+        BPark bPark = new BPark();
+        BeanUtils.copyProperties(parkShareDto, bPark);
+        bPark.setSpareTime(spareTime);
+        int i = iParkMapper.insert(bPark);
+        return i > 0 ? ResultVo.success("分享成功") : ResultVo.error("分享失败");
+    }
+
+    private String strToJSONstr(String spareTime) {
+        //todo,可能需要转换，暂时不做
+        return spareTime;
     }
 
     /**

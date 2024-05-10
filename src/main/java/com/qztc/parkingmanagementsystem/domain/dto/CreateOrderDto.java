@@ -1,24 +1,23 @@
-package com.qztc.parkingmanagementsystem.domain.po;
+package com.qztc.parkingmanagementsystem.domain.dto;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.time.LocalDateTime;
 
 /**
  * @author congyijiu
- * @create 2024-04-25-11:50
- * 订单表
+ * @create 2024-05-08-09:40
  */
+
+
 @Data
-public class BOrder {
-    /**
-     * 订单ID
-     */
-    private Long orderId;
+public class CreateOrderDto {
 
     /**
      * 客户ID
      */
+    @NotNull(message = "客户ID不能为空")
     private Long payId;
 
     /**
@@ -30,16 +29,6 @@ public class BOrder {
      * 车位ID
      */
     private Long parkId;
-
-    /**
-     * 停车时长
-     */
-    private Integer parkTime;
-
-    /**
-     * 租金
-     */
-    private Double rent;
 
     /**
      * 创建时间
@@ -68,5 +57,4 @@ public class BOrder {
      * 备注
      */
     private String remark;
-
 }

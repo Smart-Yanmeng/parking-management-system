@@ -1,6 +1,5 @@
-package com.qztc.parkingmanagementsystem.domain.dto;
+package com.qztc.parkingmanagementsystem.domain.po;
 
-import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 /**

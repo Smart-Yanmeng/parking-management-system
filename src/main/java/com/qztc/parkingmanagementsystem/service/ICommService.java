@@ -1,6 +1,6 @@
 package com.qztc.parkingmanagementsystem.service;
 
-import com.qztc.parkingmanagementsystem.domain.dto.Point;
+import com.qztc.parkingmanagementsystem.domain.po.Point;
 import com.qztc.parkingmanagementsystem.domain.po.BCommPo;
 
 import java.util.List;
@@ -11,5 +11,11 @@ import java.util.List;
  */
 public interface ICommService {
 
+    /**
+     * 查找最近的小区
+     * @param point 坐标
+     * @param num 数量
+     * @return 小区列表
+     */
     List<BCommPo> findNearestComm(Point point, int num);
 }

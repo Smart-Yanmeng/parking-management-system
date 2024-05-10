@@ -1,21 +1,12 @@
-package com.qztc.parkingmanagementsystem.domain.po;
-
-import lombok.Data;
+package com.qztc.parkingmanagementsystem.domain.dto;
 
 import java.time.LocalDateTime;
 
 /**
  * @author congyijiu
- * @create 2024-04-25-11:50
- * 订单表
+ * @create 2024-05-08-09:47
  */
-@Data
-public class BOrder {
-    /**
-     * 订单ID
-     */
-    private Long orderId;
-
+public class SettleOrderDto {
     /**
      * 客户ID
      */
@@ -58,9 +49,6 @@ public class BOrder {
 
     /**
      * 状态
-     * 0: 已创建订单
-     * 1: 已选择车位
-     * 2: 已支付
      */
     private Integer status;
 
@@ -68,5 +56,4 @@ public class BOrder {
      * 备注
      */
     private String remark;
-
 }

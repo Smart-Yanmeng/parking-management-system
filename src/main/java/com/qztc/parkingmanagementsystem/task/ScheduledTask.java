@@ -1,8 +1,7 @@
 package com.qztc.parkingmanagementsystem.task;
 
-import com.qztc.parkingmanagementsystem.domain.dto.Point;
+import com.qztc.parkingmanagementsystem.domain.po.Point;
 import com.qztc.parkingmanagementsystem.scache.CommMap;
-import com.qztc.parkingmanagementsystem.util.MapUtil;
 import com.qztc.parkingmanagementsystem.mapper.ICommMapper;
 
 import jakarta.annotation.PostConstruct;

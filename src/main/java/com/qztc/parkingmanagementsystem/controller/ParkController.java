@@ -1,7 +1,9 @@
 package com.qztc.parkingmanagementsystem.controller;
 
+import com.qztc.parkingmanagementsystem.domain.bo.CommBo;
 import com.qztc.parkingmanagementsystem.domain.dto.CommParkDto;
-import com.qztc.parkingmanagementsystem.domain.dto.Point;
+import com.qztc.parkingmanagementsystem.domain.dto.ParkShareDto;
+import com.qztc.parkingmanagementsystem.domain.po.Point;
 import com.qztc.parkingmanagementsystem.domain.po.BCommPo;
 import com.qztc.parkingmanagementsystem.domain.po.BPark;
 import com.qztc.parkingmanagementsystem.domain.vo.CommParkVo;
@@ -13,7 +15,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import jakarta.validation.Valid;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -50,17 +51,18 @@ public class ParkController {
         commParkVo.setCommVoList(new ArrayList<>());
         for (BCommPo bCommPo : nearestComm) {
             List<BPark> parkByCommId = parkService.findParkByCommId(bCommPo.getCommId(), commParkDto.getParkTime());
-            CommVo commVo = new CommVo();
-            BeanUtils.copyProperties(bCommPo, commVo);
-            commVo.setParkList(parkByCommId);
-            commVo.setCount(parkByCommId.size());
-            //todo 最高价格,数据不全，暂时不做
-            //todo 最低价格,数据不全，暂时不做
-            //todo 最低5个价格平均数,数据不全，暂时不做
+            CommVo commVo = CommBo.commToCommVo(bCommPo, parkByCommId);
             commParkVo.getCommVoList().add(commVo);
         }
         commParkVo.setCount(nearestComm.size());
 
         return ResultVo.success(commParkVo);
     }
+
+    @PostMapping("/ParkShare")
+    @Operation(summary = "我要共享停车位")
+    public ResultVo parkShare(@RequestBody @Valid ParkShareDto parkShareDto) {
+        return parkService.parkShare(parkShareDto);
+    }
+
 }

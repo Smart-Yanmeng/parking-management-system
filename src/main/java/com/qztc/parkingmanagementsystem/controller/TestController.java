@@ -1,6 +1,6 @@
 package com.qztc.parkingmanagementsystem.controller;
 
-import com.qztc.parkingmanagementsystem.domain.dto.Point;
+import com.qztc.parkingmanagementsystem.domain.po.Point;
 import com.qztc.parkingmanagementsystem.domain.po.BCommPo;
 import com.qztc.parkingmanagementsystem.domain.vo.ResultVo;
 import com.qztc.parkingmanagementsystem.scache.CommMap;

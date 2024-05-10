@@ -1,6 +1,6 @@
 package com.qztc.parkingmanagementsystem.service.impl;
 
-import com.qztc.parkingmanagementsystem.domain.dto.Point;
+import com.qztc.parkingmanagementsystem.domain.po.Point;
 import com.qztc.parkingmanagementsystem.domain.po.BCommPo;
 import com.qztc.parkingmanagementsystem.scache.CommMap;
 import com.qztc.parkingmanagementsystem.service.ICommService;
@@ -10,7 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import com.qztc.parkingmanagementsystem.mapper.ICommMapper;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 

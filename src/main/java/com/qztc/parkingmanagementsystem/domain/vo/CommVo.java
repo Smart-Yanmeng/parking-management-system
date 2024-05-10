@@ -11,9 +11,18 @@ import java.util.List;
  * @author congyijiu
  * @create 2024-04-28-20:41
  */
-@EqualsAndHashCode(callSuper = true)
 @Data
-public class CommVo extends BCommPo {
+public class CommVo {
+    private Long commId;
+
+    private String commName;
+
+    private String addr;
+
+    private double geoX;
+
+    private double geoY;
+
     private List<BPark> parkList;
 
     //车位总数
@@ -27,6 +36,8 @@ public class CommVo extends BCommPo {
 
     //最低5个价格平均数
     private Integer minPricesAve;
+
+
 
 
 
