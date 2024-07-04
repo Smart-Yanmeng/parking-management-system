@@ -1,6 +1,7 @@
 package com.qztc.parkingmanagementsystem.scache;
 
 import com.qztc.parkingmanagementsystem.domain.po.Point;
+import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,10 +12,12 @@ import java.util.List;
  */
 public class CommMap {
 
+    @Getter
     private static List<Point> points = new ArrayList<>();
 
-    public static List<Point> getPoints() {
-        return points;
+
+    private CommMap() {
+
     }
 
     public static void setPoints(List<Point> points) {

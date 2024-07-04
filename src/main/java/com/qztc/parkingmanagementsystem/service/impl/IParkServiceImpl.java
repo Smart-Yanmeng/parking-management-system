@@ -6,17 +6,17 @@ import com.qztc.parkingmanagementsystem.domain.dto.ParkShareDto;
 import com.qztc.parkingmanagementsystem.domain.po.BPark;
 import com.qztc.parkingmanagementsystem.domain.vo.ResultVo;
 import com.qztc.parkingmanagementsystem.mapper.IParkMapper;
+import com.qztc.parkingmanagementsystem.scache.WeekMap;
 import com.qztc.parkingmanagementsystem.service.IParkService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author congyijiu
@@ -24,8 +24,7 @@ import java.util.Map;
  */
 @Service
 @Slf4j
-public class IParkServiceImpl
-        implements IParkService {
+public class IParkServiceImpl implements IParkService {
 
     @Resource
     private IParkMapper iParkMapper;
@@ -70,15 +69,22 @@ public class IParkServiceImpl
         for (BPark park : bParks) {
             //获取当前日期
             Date date = new Date();
-            //获取星期几
-            String week = date.toString().split(" ")[0];
+
+            // 获取当前日期
+            LocalDate currentDate = LocalDate.now();
+
+            // 获取当前星期几
+            Integer week = currentDate.getDayOfWeek().ordinal();
+            String weekStr = WeekMap.getWeekStr(week);
+
+
             //获取空闲时间
             String spareTime = park.getSpareTime();
             //解析json
             Map<String, Map<String, String>> map = JSON.parseObject(spareTime, new TypeReference<Map<String, Map<String, String>>>() {
             });
             //获取当天的空闲时间
-            Map<String, String> today = map.get(week);
+            Map<String, String> today = map.get(weekStr);
             //获取当前时间
             LocalTime currentTime = LocalTime.now().withNano(0);
             //将时间加上hour
