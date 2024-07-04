@@ -20,7 +20,6 @@ public class UserServiceImpl implements IUserService {
     public int reg(UserRegBo userRegBo) {
 
         BUserPo user = new UserRegBoConvert().convert(userRegBo);
-
         if (user != null) return userLoginMapper.reg(user);
         else return -1;
     }
@@ -32,5 +31,11 @@ public class UserServiceImpl implements IUserService {
 
         if (user == null) return null;
         else return JwtUtil.createToken(user.getUserId());
+    }
+
+    @Override
+    public String selectUser(String username) {
+
+        return "";
     }
 }

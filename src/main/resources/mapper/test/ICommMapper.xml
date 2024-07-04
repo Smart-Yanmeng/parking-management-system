@@ -20,4 +20,10 @@
 
     <insert id="insert">
     </insert>
+
+    <select id="selectCommByKey" resultType="com.qztc.parkingmanagementsystem.domain.po.BCommPo">
+        SELECT * FROM sys_comm
+        WHERE comm_name LIKE CONCAT('%', #{key}, '%')
+    </select>
+
 </mapper>

@@ -8,4 +8,6 @@ public interface IUserLoginMapper {
     int reg(BUserPo bUserPo);
 
     BUserPo login(UserLoginDto userLoginDto);
+
+    BUserPo selectUser(String username);
 }

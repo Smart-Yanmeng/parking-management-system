@@ -1,4 +1,4 @@
 const config = {
-base_url: 'http://cn-qz-plc-1.openfrp.top:51626/'
+base_url: 'http://localhost:8888/'
 }
 export { config }

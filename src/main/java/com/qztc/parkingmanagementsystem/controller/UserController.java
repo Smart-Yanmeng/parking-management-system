@@ -21,7 +21,10 @@ public class UserController {
 
     @PostMapping("/register")
     public ResultVo register(@RequestBody UserRegDto userRegDto) {
-
+        //判断用户名是否存在
+        if (userService.selectUser(userRegDto.getUsername()) != null) {
+            return ResultVo.error("用户名已存在");
+        }
         userRegDto.setPassword(EncUtil.MD5(userRegDto.getPassword()));
         int res = userService.reg(new UserRegDtoConvert().convert(userRegDto));
 

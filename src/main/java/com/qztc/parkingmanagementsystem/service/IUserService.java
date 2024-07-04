@@ -8,4 +8,7 @@ public interface IUserService {
     int reg(UserRegBo userRegBo);
 
     String login(UserLoginDto userLoginDto);
+
+    //查询用户信息
+    String selectUser(String username);
 }

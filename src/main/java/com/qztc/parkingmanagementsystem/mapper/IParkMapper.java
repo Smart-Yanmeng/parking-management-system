@@ -28,5 +28,21 @@ public interface IParkMapper {
 
     BPark selectById(Long parkId);
 
+    /**
+     * 查询停车位
+     * @param
+     * @return
+     */
+    BPark selectParkByCommIdAndparkAddr(Long commId,String parkAddr);
+
+    /**
+     * 修改停车位
+     * @param bPark
+     * @return
+     */
+    int updatePark(BPark bPark);
+
+
     int insert(BPark bPark);
+
 }

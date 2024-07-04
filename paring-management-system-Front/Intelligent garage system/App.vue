@@ -1,12 +1,14 @@
 <script>
 	export default {
-		globalData: {
-			latitude: 0,
-			longitude: 0,
-		},
 		onLaunch: function() {
 			console.log('App Launch')
-			
+			uni.onTabBarMidButtonTap(() => {
+						uni.navigateTo({
+							url: "/pages/publish/publish",
+							animationType: "slide-in-bottom",
+							animationDuration: 400
+						})
+					})		
 		},
 		onShow: function() {
 			console.log('App Show')

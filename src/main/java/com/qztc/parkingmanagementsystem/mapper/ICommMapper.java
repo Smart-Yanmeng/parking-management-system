@@ -14,4 +14,6 @@ public interface ICommMapper {
     List<Point> selectAll();
 
     List<BCommPo> selectByIds(List<Long> ids);
+
+    List<BCommPo> selectCommByKey(String key);
 }
