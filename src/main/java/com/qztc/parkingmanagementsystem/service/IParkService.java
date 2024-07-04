@@ -32,4 +32,9 @@ public interface IParkService {
      * 分享停车位
      */
     ResultVo parkShare(ParkShareDto parkShareDto);
+
+    /**
+     * 获取小区所有车位
+     */
+    List<BPark> findAllParkByCommId(Long commId);
 }

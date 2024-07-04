@@ -34,4 +34,10 @@ public class ICommServiceImpl implements ICommService {
                 .collect(Collectors.toList());
         return iCommMapper.selectByIds(ids);
     }
+
+    @Override
+    public List<BCommPo> selectCommByKey(String key) {
+        List<BCommPo> commPoList =  iCommMapper.selectCommByKey(key);
+        return commPoList;
+    }
 }

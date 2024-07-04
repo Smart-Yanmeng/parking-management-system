@@ -49,12 +49,30 @@ public class IParkServiceImpl
 
     @Override
     public ResultVo parkShare(ParkShareDto parkShareDto) {
-        String spareTime = strToJSONstr(parkShareDto.getSpareTime());
-        BPark bPark = new BPark();
-        BeanUtils.copyProperties(parkShareDto, bPark);
-        bPark.setSpareTime(spareTime);
-        int i = iParkMapper.insert(bPark);
-        return i > 0 ? ResultVo.success("分享成功") : ResultVo.error("分享失败");
+        //判断车位是否已经被分享
+        BPark park = iParkMapper.selectParkByCommIdAndparkAddr(parkShareDto.getCommId(), parkShareDto.getParkAddr());
+        if (park != null) {
+            //修改车位信息
+            park.setSpareTime(strToJSONstr(parkShareDto.getSpareTime()));
+            park.setRent(parkShareDto.getRent());
+            park.setParkAddr(parkShareDto.getParkAddr());
+            park.setRemark(parkShareDto.getRemark());
+            int i = iParkMapper.updatePark(park);
+            return i > 0 ? ResultVo.success("分享成功") : ResultVo.error("分享失败");
+        } else {
+            String spareTime = strToJSONstr(parkShareDto.getSpareTime());
+            BPark bPark = new BPark();
+            BeanUtils.copyProperties(parkShareDto, bPark);
+            bPark.setSpareTime(spareTime);
+            int i = iParkMapper.insert(bPark);
+            return i > 0 ? ResultVo.success("分享成功") : ResultVo.error("分享失败");
+        }
+    }
+
+    @Override
+    public List<BPark> findAllParkByCommId(Long commId) {
+        List<BPark> bParks = iParkMapper.selectAllByCommunityId(commId);
+        return bParks;
     }
 
     private String strToJSONstr(String spareTime) {
@@ -72,6 +90,9 @@ public class IParkServiceImpl
             Date date = new Date();
             //获取星期几
             String week = date.toString().split(" ")[0];
+           if(week.equals("Thu")) {
+                week = "Thurs";
+           }
             //获取空闲时间
             String spareTime = park.getSpareTime();
             //解析json

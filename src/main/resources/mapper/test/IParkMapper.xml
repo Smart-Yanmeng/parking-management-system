@@ -4,6 +4,19 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.qztc.parkingmanagementsystem.mapper.IParkMapper">
+    <update id="updatePark">
+        update sys_park
+        <set>
+            <if test="commId != null">comm_id = #{commId},</if>
+            <if test="parkAddr != null">park_addr = #{parkAddr},</if>
+            <if test="belongBy != null">belong_by = #{belongBy},</if>
+            <if test="spareTime != null">spare_time = #{spareTime},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="rent != null">rent = #{rent},</if>
+        </set>
+        where park_id = #{parkId}
+    </update>
 
     <select id="selectAllByCommunityId" resultType="com.qztc.parkingmanagementsystem.domain.po.BPark">
         select * from sys_park where comm_id = #{communityId}
@@ -28,9 +41,14 @@
     <select id="selectById" resultType="com.qztc.parkingmanagementsystem.domain.po.BPark">
         select * from sys_park where park_id = #{parkId}
     </select>
+    <select id="selectParkByCommIdAndparkAddr" resultType="com.qztc.parkingmanagementsystem.domain.po.BPark">
+        select * from sys_park where comm_id = #{commId} and park_addr = #{parkAddr}
+    </select>
 
     <insert id="insert">
         insert into sys_park (comm_id, park_addr, belong_by, spare_time, status, remark)
         values (#{commId}, #{parkAddr}, #{belongBy}, #{spareTime}, #{status}, #{remark})
     </insert>
+
+
 </mapper>

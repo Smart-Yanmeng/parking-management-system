@@ -15,4 +15,13 @@
         where username = #{username}
           and password = #{password}
     </select>
+    <select id="selectUser" resultType="com.qztc.parkingmanagementsystem.domain.po.BUserPo">
+        select *
+        from sys_user
+        <where>
+            <if test="username != null and username != ''">
+                and username = #{username}
+            </if>
+        </where>
+    </select>
 </mapper>

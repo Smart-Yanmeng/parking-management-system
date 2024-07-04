@@ -18,4 +18,10 @@ public interface ICommService {
      * @return 小区列表
      */
     List<BCommPo> findNearestComm(Point point, int num);
+
+    /**
+     * 模糊查询小区
+     * @return 小区列表
+     */
+    List<BCommPo> selectCommByKey(String key);
 }

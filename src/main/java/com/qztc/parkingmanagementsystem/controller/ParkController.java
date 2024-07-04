@@ -65,4 +65,21 @@ public class ParkController {
         return parkService.parkShare(parkShareDto);
     }
 
+    @GetMapping("/getComm")
+    @Operation(summary = "获取附近小区")
+    public ResultVo getComm(@RequestParam String key) {
+        if (key == null || key.isEmpty()) {
+            return null;
+        }
+        List<BCommPo> nearestComm = commService.selectCommByKey(key);
+        return ResultVo.success(nearestComm);
+    }
+
+    @GetMapping("/getPark")
+    @Operation(summary = "获取小区所有停车位")
+    public ResultVo getPark(@RequestParam Long commId, @RequestParam Integer hour) {
+        List<BPark> parkByCommId = parkService.findParkByCommId(commId, hour);
+        return ResultVo.success(parkByCommId);
+    }
+
 }
