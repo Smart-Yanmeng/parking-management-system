@@ -40,7 +40,7 @@ public class RabbitMQListener {
             BOrder bOrder = iOrderMapper.findById(orderId);
 
             //如果订单状态不是已支付，则取消订单
-            if (!bOrder.getStatus().equals(OrderStatusemuns.PAID.getStatus()) ||
+            if (!bOrder.getStatus().equals(OrderStatusemuns.PAID.getStatus()) &&
                     !bOrder.getStatus().equals(OrderStatusemuns.COMPLETED.getStatus())) {
                 bOrder.setStatus(OrderStatusemuns.CANCEL.getStatus());
                 iOrderMapper.updateById(bOrder);
