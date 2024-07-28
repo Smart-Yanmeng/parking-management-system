@@ -13,4 +13,5 @@ public interface IOrderMapper {
     int insert(BOrder bOrder);
     BOrder findById(Long orderId);
     List<BOrder> getUnpaidOrders(Long payId);
+    int updateById(BOrder bOrder);
 }

@@ -16,7 +16,15 @@ public enum OrderStatusemuns {
     /**
      * 已支付
      */
-    PAID(2);
+    PAID(2),
+    /**
+     * 订单已完成
+     */
+    COMPLETED(3),
+    /**
+     * 订单已取消
+     */
+    CANCEL(4);
 
 
     private Integer status;

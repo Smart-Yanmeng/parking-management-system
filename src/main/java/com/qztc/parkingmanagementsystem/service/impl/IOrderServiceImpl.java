@@ -1,5 +1,6 @@
 package com.qztc.parkingmanagementsystem.service.impl;
 
+import com.qztc.parkingmanagementsystem.common.RabbitMQService;
 import com.qztc.parkingmanagementsystem.domain.bo.OrderBo;
 import com.qztc.parkingmanagementsystem.domain.dto.CreateOrderDto;
 import com.qztc.parkingmanagementsystem.domain.dto.SettleOrderDto;
@@ -10,7 +11,6 @@ import com.qztc.parkingmanagementsystem.domain.vo.ResultVo;
 import com.qztc.parkingmanagementsystem.mapper.IOrderMapper;
 import com.qztc.parkingmanagementsystem.service.IOrderService;
 import jakarta.annotation.Resource;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,7 +26,7 @@ public class IOrderServiceImpl implements IOrderService {
     private IOrderMapper iOrderMapper;
 
     @Autowired
-    private RabbitTemplate rabbitTemplate;
+    private RabbitMQService rabbitMQService;
 
     @Override
     public ResultVo createOrder(CreateOrderDto createOrderDto) {
@@ -41,8 +41,10 @@ public class IOrderServiceImpl implements IOrderService {
         int i = iOrderMapper.insert(bOrder);
         //todo,创建订单成功后，可能需要发送消息给商家
         //todo,创建订单成功后，可能需要锁定车位
-        // 发送消息
-        rabbitTemplate.convertAndSend("order_create_exchange","XA",createOrderDto);
+
+        //发送消息到延迟队列
+        rabbitMQService.sendOrderMessage(bOrder.getOrderId().toString());
+
         return i > 0 ? ResultVo.success("创建订单成功") : ResultVo.error("创建订单失败");
     }
 

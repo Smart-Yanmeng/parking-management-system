@@ -5,20 +5,34 @@
 
 <mapper namespace="com.qztc.parkingmanagementsystem.mapper.IOrderMapper">
 
-    <insert id="insert">
+    <insert id="insert" useGeneratedKeys="true" keyProperty="orderId">
         insert into
             sys_order(pay_id, recv_id, park_id, park_time, rent, create_time, update_time, del_flag, status, remark)
         VALUES
         (#{payId}, #{recvId}, #{parkId}, #{parkTime}, #{rent}, #{createTime}, #{updateTime}, #{delFlag}, #{status}, #{remark})
-
     </insert>
 
     <select id="findById" resultType="com.qztc.parkingmanagementsystem.domain.po.BOrder">
         select * from sys_order where order_id = #{id}
     </select>
     <select id="getUnpaidOrders" resultType="com.qztc.parkingmanagementsystem.domain.po.BOrder">
-
         select * from sys_order where status = 0 and pay_id = #{payId}
-
     </select>
+
+    <update id="updateById" parameterType="com.qztc.parkingmanagementsystem.domain.po.BOrder">
+        update sys_order
+        <set>
+            <if test="payId != null">pay_id = #{payId},</if>
+            <if test="recvId != null">recv_id = #{recvId},</if>
+            <if test="parkId != null">park_id = #{parkId},</if>
+            <if test="parkTime != null">park_time = #{parkTime},</if>
+            <if test="rent != null">rent = #{rent},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </set>
+        where order_id = #{orderId}
+    </update>
 </mapper>
