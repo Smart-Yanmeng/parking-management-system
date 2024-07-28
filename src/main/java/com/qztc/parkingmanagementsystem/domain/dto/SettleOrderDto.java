@@ -1,11 +1,14 @@
 package com.qztc.parkingmanagementsystem.domain.dto;
 
+import lombok.Data;
+
 import java.time.LocalDateTime;
 
 /**
  * @author congyijiu
  * @create 2024-05-08-09:47
  */
+@Data
 public class SettleOrderDto {
     /**
      * 客户ID

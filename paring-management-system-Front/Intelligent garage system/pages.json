@@ -64,6 +64,13 @@
 			{
 				"navigationBarTitleText" : ""
 			}
+		},
+		{
+			"path" : "pages/parking/parkingDetail",
+			"style" : 
+			{
+				"navigationBarTitleText" : ""
+			}
 		}
 		
 	],

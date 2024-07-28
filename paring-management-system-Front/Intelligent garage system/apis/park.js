@@ -45,3 +45,16 @@ export const getPark = (query) => {
 	})
 
 }
+
+//
+export const getParkDetail = (query) => {
+	return apiResquest({
+		url: `park/getParkByparkId?parkId=${query}`,
+		method: 'POST',
+		header: {
+			'content-type': 'application/x-www-form-urlencoded'
+		}
+
+	})
+
+}

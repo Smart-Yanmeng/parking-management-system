@@ -16,4 +16,9 @@
     <select id="findById" resultType="com.qztc.parkingmanagementsystem.domain.po.BOrder">
         select * from sys_order where order_id = #{id}
     </select>
+    <select id="getUnpaidOrders" resultType="com.qztc.parkingmanagementsystem.domain.po.BOrder">
+
+        select * from sys_order where status = 0 and pay_id = #{payId}
+
+    </select>
 </mapper>

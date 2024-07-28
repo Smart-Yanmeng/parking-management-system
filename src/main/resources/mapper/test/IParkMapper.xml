@@ -46,8 +46,8 @@
     </select>
 
     <insert id="insert">
-        insert into sys_park (comm_id, park_addr, belong_by, spare_time, status, remark)
-        values (#{commId}, #{parkAddr}, #{belongBy}, #{spareTime}, #{status}, #{remark})
+        insert into sys_park (comm_id, park_addr, belong_by, spare_time, status, remark, rent)
+        values (#{commId}, #{parkAddr}, #{belongBy}, #{spareTime}, #{status}, #{remark}, #{rent})
     </insert>
 
 

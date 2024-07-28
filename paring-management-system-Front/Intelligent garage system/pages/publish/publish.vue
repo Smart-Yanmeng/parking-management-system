@@ -76,50 +76,50 @@
 				DateTime: [{
 						id: 0,
 						name: '周一',
-						start: "0",
-						end: "0",
+						start: "00:00",
+						end: "00:00",
 						Name: "Mon"
 					},
 					{
 						id: 1,
 						name: '周二',
-						start: "0",
-						end: "0",
+						start: "00:00",
+						end: "00:00",
 						Name: "Tues"
 					},
 					{
 						id: 2,
 						name: '周三',
-						start: "0",
-						end: "0",
+						start: "00:00",
+						end: "00:00",
 						Name: "Wed"
 					},
 					{
 						id: 3,
 						name: '周四',
-						start: "0",
-						end: "0",
+						start: "00:00",
+						end: "00:00",
 						Name: "Thurs"
 					},
 					{
 						id: 4,
 						name: '周五',
-						start: "0",
-						end: "0",
+						start: "00:00",
+						end: "00:00",
 						Name: "Fri"
 					},
 					{
 						id: 5,
 						name: '周六',
-						start: "0",
-						end: "0",
+						start: "00:00",
+						end: "00:00",
 						Name: "Sat"
 					},
 					{
 						id: 6,
 						name: '周日',
-						start: "0",
-						end: "0",
+						start: "00:00",
+						end: "00:00",
 						Name: "Sun"
 					}
 				],
@@ -261,7 +261,7 @@
 					console.log(res)
 					if (res.code == 200) {
 						uni.showToast({
-							title:"保存成功"
+							title: "保存成功"
 						})
 					}
 
@@ -272,12 +272,12 @@
 			transformDateTime(data) {
 				let transformedData = {};
 				data.forEach(item => {
-					if (item.start !== "0" || item.end !== "0") {
-						transformedData[item.Name] = {
-							start: item.start,
-							end: item.end
-						};
-					}
+
+					transformedData[item.Name] = {
+						start: item.start,
+						end: item.end
+					};
+
 				});
 				return transformedData;
 			},

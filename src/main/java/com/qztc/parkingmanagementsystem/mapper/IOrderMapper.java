@@ -1,7 +1,8 @@
 package com.qztc.parkingmanagementsystem.mapper;
 
 import com.qztc.parkingmanagementsystem.domain.po.BOrder;
-import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 /**
  * @author congyijiu
@@ -11,4 +12,5 @@ import org.apache.ibatis.annotations.Mapper;
 public interface IOrderMapper {
     int insert(BOrder bOrder);
     BOrder findById(Long orderId);
+    List<BOrder> getUnpaidOrders(Long payId);
 }

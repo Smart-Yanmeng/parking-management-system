@@ -18,6 +18,7 @@ public enum OrderStatusemuns {
      */
     PAID(2);
 
+
     private Integer status;
 
     OrderStatusemuns(Integer status) {

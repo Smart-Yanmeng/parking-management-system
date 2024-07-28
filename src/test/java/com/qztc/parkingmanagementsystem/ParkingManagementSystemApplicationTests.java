@@ -8,12 +8,16 @@ import com.qztc.parkingmanagementsystem.util.RandomScheduleGenerator;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
+import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.time.LocalTime;
 import java.util.*;
 
 @SpringBootTest
 @Slf4j
+@EnableRabbit
 class ParkingManagementSystemApplicationTests {
 
     @Resource

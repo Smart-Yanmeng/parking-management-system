@@ -82,4 +82,11 @@ public class ParkController {
         return ResultVo.success(parkByCommId);
     }
 
+    @PostMapping("/getParkByparkId")
+    @Operation(summary = "根据停车位id查找停车位")
+    public ResultVo getParkByparkId(@RequestParam Long parkId) {
+        BPark parkById = parkService.findParkById(parkId);
+        return ResultVo.success(parkById);
+    }
+
 }
